@@ -3,7 +3,7 @@
 # copyright and licensing details.
 
 {
-    'name': 'Project Task Duration',
+    'name': 'Automatic Task Duration',
     'version': '10.0.1.0.0',
     'category': 'Project',
     'summary': '''

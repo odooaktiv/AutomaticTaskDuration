@@ -25,8 +25,9 @@ class ProjectTask(models.Model):
         self.write({'end_date': fields.Datetime.now()})
         ctx = self._context.copy()
         ctx.update({'start_date': self.start_date, 'end_date': self.end_date})
+        view_id = self.env.ref('automatic_task_duration.view_task_entry')
         return {
-            'view_id': self.env.ref('project_task_timer.view_task_entry').ids,
+            'view_id': view_id.ids,
             'view_type': 'form',
             "view_mode": 'form',
             'res_model': 'task.entry',

@@ -2,7 +2,7 @@
 # Part of AktivSoftware See LICENSE file for full
 # copyright and licensing details.
 {
-    'name': 'Project Task Timer',
+    'name': 'Automatic Task Duration',
     'version': '11.0.1.0.0',
     'category': 'Project',
     'summary': '''

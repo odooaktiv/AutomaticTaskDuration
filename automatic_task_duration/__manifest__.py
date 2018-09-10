@@ -11,7 +11,7 @@
         ''',
     'website': 'http://www.aktivsoftware.com',
     'author': 'Aktiv Software',
-    # 'license': "OPL-1",
+    'license': "AGPL-3",
     'depends': [
         'hr_timesheet'
     ],

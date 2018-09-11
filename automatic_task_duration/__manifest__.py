@@ -21,7 +21,5 @@
         'wizards/task_entry_view.xml'
     ],
     'images': ['static/description/banner.jpg'],
-    'auto_install': False,
     'installable': True,
-    'application': False
 }

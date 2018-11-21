@@ -2,7 +2,7 @@
 import datetime
 
 from odoo import _, api, fields, models
-from odoo.exceptions import Warning
+from odoo.exceptions import UserError
 
 
 class TaskEntry(models.TransientModel):
@@ -10,6 +10,7 @@ class TaskEntry(models.TransientModel):
 
     start_date = fields.Datetime(string="Start Date", readonly=True)
     end_date = fields.Datetime(string="End Date", readonly=True)
+    employee_id = fields.Many2one('hr.employee', string="Employee", required=True)
     description = fields.Text(string="Description", required=True)
     duration = fields.Float('Duration', readonly=True)
 
@@ -38,7 +39,7 @@ class TaskEntry(models.TransientModel):
         task_rec = self.env['project.task'].browse(task_id)
         project_id = task_rec.project_id
         if self.duration == 0.0:
-            raise Warning(_("You can't save entry for %s duration") % (
+            raise UserError(_("You can't save entry for %s duration") % (
                 self.duration))
         vals = {'date': fields.Date.context_today(self),
                 'start_date': self.start_date,
@@ -47,9 +48,10 @@ class TaskEntry(models.TransientModel):
                 'name': self.description,
                 'task_id': task_id,
                 'project_id': project_id.id,
+                'employee_id': self.employee_id.id,
                 'unit_amount': self.duration,
                 'account_id': project_id.analytic_account_id.id
                 }
-        analytic_line_rec = self.env['account.analytic.line'].create(vals)
+        analytic_line_rec = self.env['account.analytic.line'].sudo().create(vals)
         task_rec.write({'timesheet_ids': [(4, 0, [analytic_line_rec.id])],
                         'is_start': False})

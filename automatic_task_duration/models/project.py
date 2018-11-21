@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import Warning
 
 
 class ProjectTask(models.Model):
@@ -14,8 +15,11 @@ class ProjectTask(models.Model):
         """
         Start the Timmer.
         """
-        self.write({'is_start': True,
-                    'start_date': fields.Datetime.now()})
+        if self.project_id:
+            self.write({'is_start': True,
+                        'start_date': fields.Datetime.now()})
+        else:
+            raise Warning(_("Please link Project to this Task to save the entry"))
 
     @api.multi
     def end_timer(self):

@@ -17,6 +17,7 @@
     ],
     'website': 'www.aktivsoftware.com',
     'data': [
+        'security/ir.model.access.csv',
         'views/project_timesheet_view.xml',
         'wizards/task_entry_view.xml'
     ],

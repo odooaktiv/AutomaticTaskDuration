@@ -4,12 +4,12 @@
         <field name="model">project.task</field>
         <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>
         <field name="arch" type="xml">
-            <xpath expr="//page/field[@name='timesheet_ids']/tree" position="attributes">
-                <attribute name="create">false</attribute>
-            </xpath>
             <xpath expr="//page/field[@name='timesheet_ids']/tree/field[@name='date']" position="after">
                 <field name="start_date"/>
                 <field name="end_date"/>
+            </xpath>
+            <xpath expr="//page/field[@name='timesheet_ids']/tree/field[@name='date']" position="attributes">
+                <attribute name="invisible">1</attribute>
             </xpath>
             <xpath expr="//field[@name='project_id']" position="after">
                 <field name="is_start" invisible="1"/>

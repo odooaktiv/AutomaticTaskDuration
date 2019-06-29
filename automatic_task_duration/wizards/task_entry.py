@@ -34,20 +34,25 @@ class TaskEntry(models.TransientModel):
     @api.multi
     def save_entry(self):
         context = self._context
-        task_id = context.get('active_id', False)
+        task_id = context.get('task_id', False)
         task_rec = self.env['project.task'].browse(task_id)
-        task_rec.write({'is_start': False})
-        project_id = task_rec.project_id.id
-        if self.duration == 0.0:
-            raise Warning(_("You can't save entry for %s duration") % (
-                self.duration))
-        vals = {'date': fields.Date.context_today,
-                'start_date': self.start_date,
-                'end_date': self.end_date,
-                'user_id': self.env.user.id,
-                'name': self.description,
-                'task_id': task_id,
-                'project_id': project_id,
-                'unit_amount': self.duration
-                }
-        task_rec.write({'timesheet_ids': [(0, 0, vals)]})
+        project_id = task_rec.project_id
+        if project_id:
+            if self.duration == 0.0:
+                raise Warning(_("You can't save entry for %s duration") % (
+                    self.duration))
+            vals = {'date': fields.Date.context_today(self),
+                    'start_date': self.start_date,
+                    'end_date': self.end_date,
+                    'user_id': self.env.user.id,
+                    'name': self.description,
+                    'task_id': task_id,
+                    'project_id': project_id.id,
+                    'unit_amount': self.duration,
+                    'account_id': project_id.analytic_account_id.id
+                    }
+            analytic_line_rec = self.env['account.analytic.line'].create(vals)
+            task_rec.write({'timesheet_ids': [(4, 0, [analytic_line_rec.id])],
+                            'is_start': False})
+        else:
+            raise Warning(_("Please link Project to this Task to save the entry"))

@@ -1,7 +1,7 @@
 Project Task Timer
 ------------------------------------
 
-Odoo Version : Master
+Odoo Version : Odoo 12.0 Community Master
 
 Installation 
 -------------------------------------

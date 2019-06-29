@@ -2,15 +2,15 @@
 # Part of AktivSoftware See LICENSE file for full
 # copyright and licensing details.
 {
-    'name': 'Project Task Timer',
-    'version': '11.0.1.0.0',
+    'name': 'Automatic Task Duration',
+    'version': '12.0.1.0.0',
     'category': 'Project',
     'summary': '''
         Calculates project task duration automatically.
         ''',
     'website': 'http://www.aktivsoftware.com',
     'author': 'Aktiv Software',
-    # 'license': "OPL-1",
+    'license': "AGPL-3",
     'depends': [
         'hr_timesheet'
     ],
@@ -20,7 +20,5 @@
         'wizards/task_entry_view.xml'
     ],
     'images': ['static/description/banner.jpg'],
-    'auto_install': False,
     'installable': True,
-    'application': False
 }

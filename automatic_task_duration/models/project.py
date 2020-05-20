@@ -9,7 +9,6 @@ class ProjectTask(models.Model):
     start_date = fields.Datetime()
     end_date = fields.Datetime()
 
-    @api.multi
     def start_timer(self):
         """
         Start the Timmer.
@@ -17,7 +16,6 @@ class ProjectTask(models.Model):
         self.write({'is_start': True,
                     'start_date': fields.Datetime.now()})
 
-    @api.multi
     def end_timer(self):
         """
         End the Timmer.

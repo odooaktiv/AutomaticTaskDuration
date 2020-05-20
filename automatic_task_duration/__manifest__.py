@@ -3,7 +3,7 @@
 # copyright and licensing details.
 {
     'name': 'Automatic Task Duration',
-    'version': '12.0.1.0.0',
+    'version': '13.0.1.0.0',
     'category': 'Project',
     'summary': '''
         Calculates project task duration automatically.

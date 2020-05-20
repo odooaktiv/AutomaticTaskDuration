@@ -12,7 +12,7 @@ class TaskEntry(models.TransientModel):
     end_date = fields.Datetime(string="End Date", readonly=True)
     description = fields.Text(string="Description", required=True)
     duration = fields.Float('Duration', readonly=True)
-
+    
     @api.model
     def default_get(self, default_fields):
         context = self._context
@@ -31,7 +31,6 @@ class TaskEntry(models.TransientModel):
         })
         return res
 
-    @api.multi
     def save_entry(self):
         context = self._context
         task_id = context.get('task_id', False)
